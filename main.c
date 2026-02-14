@@ -1,20 +1,26 @@
 #include <stdio.h>
 
+// A 'struct' is a custom data type. 
+// It groups different variables into one block of memory.
+struct Process {
+    int pid;          // Process ID
+    char status;      // 'R' for Running, 'S' for Sleeping
+    float cpu_usage;
+};
+
 int main() {
-    // 1. Create an array of 3 integers
-    int my_numbers[3] = {10, 20, 30};
+    // Initialize our struct
+    struct Process my_app = {1001, 'R', 0.5f};
 
-    // 2. The array name is actually a pointer to the start
-    printf("Array name address:     %p\n", (void*)my_numbers);
-    printf("Address of element [0]: %p\n", (void*)&my_numbers[0]);
-    printf("Address of element [1]: %p\n", (void*)&my_numbers[1]);
-    printf("Address of element [2]: %p\n", (void*)&my_numbers[2]);
+    printf("Process Info:\n");
+    printf("ID: %d\n", my_app.pid);
+    printf("Status: %c\n", my_app.status);
 
-    // 3. Pointer Arithmetic (The "Magic")
-    // If we add 1 to the pointer, it moves to the NEXT integer slot
-    printf("Value at [0]: %d\n", *my_numbers);
-    printf("Value at [1]: %d\n", *(my_numbers + 1));
-    printf("Value at [2]: %d\n", *(my_numbers + 2));
+    // Now, the Kernel way: using a pointer to a struct
+    struct Process *ptr = &my_app;
+
+    // To access members via a pointer, we use the 'arrow' operator ->
+    printf("ID via pointer: %d\n", ptr->pid);
 
     return 0;
 }
