@@ -1,18 +1,20 @@
 #include <stdio.h>
 
 int main() {
-    // 1. We create a pointer and point it to 'NULL' (Address 0).
-    // In modern OSs, Address 0 is strictly off-limits.
-    int *ptr = NULL;
+    // 1. Create an array of 3 integers
+    int my_numbers[3] = {10, 20, 30};
 
-    printf("Attempting to write to a NULL pointer...\n");
+    // 2. The array name is actually a pointer to the start
+    printf("Array name address:     %p\n", (void*)my_numbers);
+    printf("Address of element [0]: %p\n", (void*)&my_numbers[0]);
+    printf("Address of element [1]: %p\n", (void*)&my_numbers[1]);
+    printf("Address of element [2]: %p\n", (void*)&my_numbers[2]);
 
-    // 2. This is the "Illegal" move. 
-    // We are telling the CPU: "Go to address 0 and put the number 99 there."
-    *ptr = 99; 
-
-    // 3. This line will NEVER run.
-    printf("I successfully wrote to memory!\n");
+    // 3. Pointer Arithmetic (The "Magic")
+    // If we add 1 to the pointer, it moves to the NEXT integer slot
+    printf("Value at [0]: %d\n", *my_numbers);
+    printf("Value at [1]: %d\n", *(my_numbers + 1));
+    printf("Value at [2]: %d\n", *(my_numbers + 2));
 
     return 0;
 }
