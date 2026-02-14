@@ -1,26 +1,25 @@
 #include <stdio.h>
 
-// A 'struct' is a custom data type. 
-// It groups different variables into one block of memory.
 struct Process {
-    int pid;          // Process ID
-    char status;      // 'R' for Running, 'S' for Sleeping
-    float cpu_usage;
+    int pid;
+    char status;
 };
 
+// This function takes a POINTER. It's fast!
+void kill_process(struct Process *p) {
+    printf("Kernel: Killing process %d...\n", p->pid);
+    p->status = 'K'; // 'K' for Killed
+}
+
 int main() {
-    // Initialize our struct
-    struct Process my_app = {1001, 'R', 0.5f};
+    struct Process my_app = {1024, 'R'};
 
-    printf("Process Info:\n");
-    printf("ID: %d\n", my_app.pid);
-    printf("Status: %c\n", my_app.status);
+    printf("App Status: %c\n", my_app.status);
 
-    // Now, the Kernel way: using a pointer to a struct
-    struct Process *ptr = &my_app;
+    // We pass the ADDRESS of my_app
+    kill_process(&my_app);
 
-    // To access members via a pointer, we use the 'arrow' operator ->
-    printf("ID via pointer: %d\n", ptr->pid);
+    printf("App Status after kernel intervention: %c\n", my_app.status);
 
     return 0;
 }
