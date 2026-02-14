@@ -2,6 +2,11 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-void log_message(char *message);
+// Define some levels (Kernel style)
+#define LOG_INFO  0
+#define LOG_WARN  1
+#define LOG_ERR   2
+
+void log_message(int level, char *message);
 
 #endif

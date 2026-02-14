@@ -1,8 +1,8 @@
 #include "logger.h"
 
 int main() {
-    log_message("System booting...");
-    log_message("Pointers initialized.");
-    log_message("Ready for contribution.");
+    log_message(LOG_INFO, "System booting...");
+    log_message(LOG_WARN, "Battery low!");
+    log_message(LOG_ERR, "Direct Memory Access failed!");
     return 0;
 }
