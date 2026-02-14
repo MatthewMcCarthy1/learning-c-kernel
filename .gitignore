@@ -1,0 +1,10 @@
+# Executables
+my_program
+*.out
+*.exe
+
+# Object files (intermediary compilation files)
+*.o
+
+# Debug symbols (for macOS/Linux)
+*.dSYM/
