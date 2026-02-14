@@ -1,19 +1,18 @@
 #include <stdio.h>
 
 int main() {
-    int my_data = 42;
-    
-    // 1. Create a pointer. 
-    // Think of this as a 'Remote Control' for the variable 'my_data'.
-    int *ptr = &my_data; 
+    // 1. We create a pointer and point it to 'NULL' (Address 0).
+    // In modern OSs, Address 0 is strictly off-limits.
+    int *ptr = NULL;
 
-    printf("Before: %d\n", my_data);
-    printf("Pointer is looking at address: %p\n", (void*)ptr);
+    printf("Attempting to write to a NULL pointer...\n");
 
-    // 2. De-referencing (The '*' here means "Go to the address and act")
-    *ptr = 100; 
+    // 2. This is the "Illegal" move. 
+    // We are telling the CPU: "Go to address 0 and put the number 99 there."
+    *ptr = 99; 
 
-    printf("After:  %d (Changed without touching the 'my_data' variable!)\n", my_data);
-    
+    // 3. This line will NEVER run.
+    printf("I successfully wrote to memory!\n");
+
     return 0;
 }
