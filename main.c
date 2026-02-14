@@ -1,25 +1,32 @@
 #include <stdio.h>
+#include <stdlib.h> // Required for malloc and free
 
 struct Process {
     int pid;
     char status;
 };
 
-// This function takes a POINTER. It's fast!
-void kill_process(struct Process *p) {
-    printf("Kernel: Killing process %d...\n", p->pid);
-    p->status = 'K'; // 'K' for Killed
-}
-
 int main() {
-    struct Process my_app = {1024, 'R'};
+    // 1. Ask the OS for exactly enough memory to hold one Process struct
+    // malloc stands for "memory allocation"
+    struct Process *ptr = malloc(sizeof(struct Process));
 
-    printf("App Status: %c\n", my_app.status);
+    // 2. Check if the OS actually gave us the memory
+    if (ptr == NULL) {
+        printf("Kernel Error: Out of memory!\n");
+        return 1;
+    }
 
-    // We pass the ADDRESS of my_app
-    kill_process(&my_app);
+    // 3. Use the memory
+    ptr->pid = 2048;
+    ptr->status = 'R';
+    printf("Dynamic Process created at address %p with PID %d\n", (void*)ptr, ptr->pid);
 
-    printf("App Status after kernel intervention: %c\n", my_app.status);
+    // 4. CRITICAL: Give the memory back to the OS
+    free(ptr);
+    ptr = NULL; // Good practice: point to NULL so we don't accidentally use it again
+
+    printf("Memory freed successfully.\n");
 
     return 0;
 }
